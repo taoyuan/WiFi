@@ -40,7 +40,7 @@ wireless.open().then(() => {
 
 ### More Examples
 
-More examples is [here](examples)
+More examples are [here](examples)
 
 ## Test
 
