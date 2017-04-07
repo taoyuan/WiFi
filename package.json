@@ -7,7 +7,7 @@
     "lint": "npm run lint:js",
     "lint:js": "eslint lib",
     "test": "mocha test/**/*.test.js",
-    "publish": "npm run lint"
+    "prepublish": "npm run lint"
   },
   "repository": {
     "type": "git",
