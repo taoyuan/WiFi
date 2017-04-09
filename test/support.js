@@ -9,9 +9,13 @@ if (!exports.isRoot()) {
   process.exit(1);
 }
 
-const ssid = exports.ssid = process.env.SSID || 'ssid';
-const password = exports.password = process.env.PASS || 'password';
+const ssid = exports.ssid = process.env.SSID;
+const password = exports.password = process.env.PASS;
 
-console.log('----');
-console.log('AP test creds:', {ssid, password});
-console.log('----');
+if (ssid) {
+  console.log('----------------------------');
+  console.log('AP test with creds', {ssid, password});
+  console.log('----------------------------');
+} else {
+  console.warn('* No ssid configured, skip all AP tests.');
+}

@@ -1,6 +1,6 @@
 {
   "name": "wirelesser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A wireless util to control wpa_supplicant",
   "main": "index",
   "scripts": {
@@ -27,6 +27,7 @@
     "child-process-promise": "^2.2.1",
     "debug": "^2.6.3",
     "eventemitter2": "^4.1.0",
+    "fs-extra": "^2.1.2",
     "js-csp": "^0.9.2",
     "unix-dgram": "^2.0.0",
     "wireless-tools": "^0.19.0"
