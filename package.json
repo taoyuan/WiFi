@@ -1,6 +1,6 @@
 {
   "name": "wirelesser",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "A wireless util to control wpa_supplicant",
   "main": "index",
   "scripts": {
