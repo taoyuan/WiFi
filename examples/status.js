@@ -3,14 +3,19 @@
 const {Wireless} = require('..');
 const wireless = new Wireless('wlan0');
 
-wireless.open().then(() => {
-  return wireless.status().then(status => {
-    console.log(status);
-  });
-}).then(() => wireless.close());
+wireless.status().then(console.log);
+
 
 // ----------------------
-// WiFi mode disconnected
+// inactive
+// ----------------------
+// { wpa_state: 'INACTIVE',
+//   p2p_device_address: 'b8:27:eb:7e:11:87',
+//   address: 'b8:27:eb:7e:11:87',
+//   uuid: '1b984a4b-f4df-5ca5-9c09-04b4dc519b0c' }
+
+// ----------------------
+// disconnected
 // ----------------------
 //
 // { wpa_state: 'DISCONNECTED',
@@ -19,7 +24,7 @@ wireless.open().then(() => {
 //   uuid: '1b984a4b-f4df-5ca5-9c09-04b4dc519b0c' }
 
 // -------------------
-// WiFi mode connected
+// connected
 // -------------------
 // { bssid: '58:6d:8f:fb:1a:7e',
 //   freq: '2457',

@@ -1,10 +1,6 @@
 'use strict';
 
 const {Wireless} = require('..');
-const wireless = new Wireless('wlan0');
+const wireless = new Wireless();
 
-wireless.open().then(() => {
-  return wireless.scan().then(networks => {
-    console.log(networks);
-  });
-}).then(() => wireless.close());
+wireless.scan().then(console.log);

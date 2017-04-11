@@ -28,8 +28,7 @@
     "debug": "^2.6.3",
     "eventemitter2": "^4.1.0",
     "fs-extra": "^2.1.2",
-    "js-csp": "^0.9.2",
-    "unix-dgram": "^2.0.0",
+    "lodash": "^4.17.4",
     "wireless-tools": "^0.19.0"
   },
   "devDependencies": {

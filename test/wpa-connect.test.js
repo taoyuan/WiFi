@@ -2,46 +2,51 @@
 
 const PromiseA = require('bluebird');
 const s = require('./support');
-const {WPA} = require('..');
+const {WPA, Monitor} = require('..');
 
 if (s.ssid) {
   describe('WPA connect', () => {
     const wpa = new WPA('wlan0');
+    const monitor = new Monitor('wlan0');
 
-    before(() => wpa.open());
-    after(() => wpa.close());
+    beforeEach(() => {
+      return wpa.listNetworks().map(n => wpa.removeNetwork(n.id));
+    });
 
-    it('should emit wifi_invalidkey event', function (done) {
+    it('should emit "invalidkey" event', function (done) {
       this.timeout(10000);
-      wpa.once('wifi_invalidkey', done);
+      monitor.once('invalidkey', () => done());
 
-      wpa.addNetwork().then(id => {
-        return PromiseA.mapSeries([
-          () => wpa.setNetworkSettingString(id, 'ssid', s.ssid),
-          () => wpa.setNetworkSettingString(id, 'psk', 'invalid_key'),
-          () => wpa.selectNetwork(id)
-        ], fn => fn());
+      addNetwork(wpa, s.ssid, 'invalid_key');
+    });
+
+    it('should emit "connected" event', function (done) {
+      this.timeout(10000);
+      monitor.once('connected', () => done());
+
+      addNetwork(wpa, s.ssid, s.password);
+    });
+
+    it('should emit "disconnected" event', function (done) {
+      this.timeout(10000);
+
+      monitor.once('connected', () => {
+        monitor.once('disconnected', () => done());
+        wpa.disconnect();
       });
-    });
 
-    it('should emit wifi_connected event', function (done) {
-      this.timeout(10000);
-      wpa.once('wifi_connected', done);
-
-      wpa.addNetwork().then(id => {
-        return PromiseA.mapSeries([
-          () => wpa.setNetworkSettingString(id, 'ssid', s.ssid),
-          () => wpa.setNetworkSettingString(id, 'psk', s.password),
-          () => wpa.enableNetwork(id),
-          () => wpa.selectNetwork(id),
-        ], fn => fn());
-      });
+      addNetwork(wpa, s.ssid, s.password);
     });
+  });
+}
 
-    it('should emit wifi_disconnected', function (done) {
-      this.timeout(10000);
-      wpa.once('wifi_disconnected', done);
-      wpa.disconnect();
-    });
+function addNetwork(wpa, ssid, password) {
+  return wpa.addNetwork().then(id => {
+    return PromiseA.mapSeries([
+      () => wpa.setNetworkSettingString(id, 'ssid', ssid),
+      () => wpa.setNetworkSettingString(id, 'psk', password),
+      () => wpa.enableNetwork(id),
+      () => wpa.selectNetwork(id),
+    ], fn => fn());
   });
 }
