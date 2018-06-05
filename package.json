@@ -1,12 +1,13 @@
 {
   "name": "wirelesser",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A wireless util to control wpa_supplicant",
-  "main": "./lib/index.js",
   "files": [
     "lib",
     "create_ap"
   ],
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "pull": "git pull --recurse-submodules",
     "clean": "rimraf lib",
