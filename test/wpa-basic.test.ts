@@ -1,12 +1,9 @@
-/* eslint-disable prefer-arrow-callback */
+import './support';
 
-'use strict';
-const {assert} = require('chai');
-require('./support');
-const {WPA} = require('..');
+import {assert} from 'chai';
+import {WPA} from '../src';
 
 describe('WPA Basic Tests', function () {
-
   describe('functions', function () {
     const wpa = new WPA('wlan0');
 

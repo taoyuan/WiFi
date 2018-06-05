@@ -1,9 +1,0 @@
-{
-	"env": {
-		"mocha": true
-	},
-	"rules": {
-		"semi": 0,
-		"max-nested-callbacks": 0
-	}
-}

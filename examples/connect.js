@@ -3,6 +3,9 @@
 const {Wireless} = require('..');
 const wireless = new Wireless();
 
-return wireless.connect('TY', 'king8888').then(result => {
+const argv = require('yargs').argv;
+
+(async () => {
+  const result = await wireless.connect(argv.ssid, argv.pass);
   console.log(result);
-});
+})();

@@ -2,11 +2,16 @@
   "name": "wirelesser",
   "version": "2.0.5",
   "description": "A wireless util to control wpa_supplicant",
-  "main": "index",
+  "main": "./lib/index.js",
+  "files": [
+    "lib",
+    "create_ap"
+  ],
   "scripts": {
-    "lint": "npm run lint:js",
-    "lint:js": "eslint lib",
-    "test": "mocha test/**/*.test.js"
+    "pull": "git pull --recurse-submodules",
+    "clean": "rimraf lib",
+    "build": "npm run clean && echo Using TypeScript && tsc --version && tsc --pretty",
+    "test": "mocha --require ts-node/register --recursive \"test/**/*.test.ts\""
   },
   "repository": {
     "type": "git",
@@ -25,32 +30,20 @@
   "license": "ISC",
   "dependencies": {
     "child-process-promise": "^2.2.1",
-    "debug": "^2.6.3",
-    "eventemitter2": "^4.1.0",
-    "fs-extra": "^2.1.2",
-    "lodash": "^4.17.4",
-    "bluebird": "^3.5.0",
+    "debug": "^3.1.0",
     "wireless-tools": "^0.19.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "conventional-changelog-lint": "^1.1.9",
-    "conventional-commits-detector": "^0.1.1",
-    "conventional-recommended-bump": "^1.0.0",
-    "eslint": "^3.19.0",
-    "eslint-plugin-mocha": "^4.9.0",
-    "grunt": "^1.0.1",
-    "grunt-bump": "^0.8.0",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-jsdoc": "^2.1.0",
-    "grunt-jsdoc-to-markdown": "^3.0.0",
-    "grunt-shell": "^2.1.0",
-    "load-grunt-tasks": "^3.5.2",
-    "mocha": "^3.2.0",
-    "nock": "^9.0.11",
-    "should": "^11.2.1",
-    "unexpected": "^10.26.3",
-    "xo": "^0.18.1"
+    "@types/chai": "^4.1.3",
+    "@types/debug": "0.0.30",
+    "@types/mocha": "^5.2.1",
+    "@types/node": "^10.3.1",
+    "@types/srp": "0.0.27",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "rimraf": "^2.6.2",
+    "ts-node": "^6.1.0",
+    "typescript": "^2.9.1",
+    "yargs": "^11.0.0"
   }
 }
