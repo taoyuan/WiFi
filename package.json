@@ -1,6 +1,6 @@
 {
   "name": "wirelesser",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "description": "A wireless util to control wpa_supplicant",
   "main": "./lib/index.js",
   "files": [
