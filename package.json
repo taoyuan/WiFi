@@ -1,6 +1,6 @@
 {
   "name": "wirelesser",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "A wireless util to control wpa_supplicant",
   "files": [
     "lib",
