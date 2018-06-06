@@ -18,6 +18,23 @@ export interface Network {
   flags: string;
 }
 
+export interface WpaStatus {
+  wpa_state: string;
+  uuid: string;
+  address: string;
+  p2p_device_address: string;
+  id?: number,
+  ip_address?: string;
+  bssid?: string;
+  freq?: string | number;
+  ssid?: string;
+  mode?: string;
+  pairwise_cipher?: string;
+  group_cipher?: string;
+  key_mgmt?: string;
+  [name: string]: any;
+}
+
 export class WPA extends EventEmitter {
 
   constructor(public iface: string = 'wlan0') {
@@ -42,16 +59,16 @@ export class WPA extends EventEmitter {
   /**
    * Request for status
    */
-  async status(): Promise<{ [name: string]: any }> {
+  async status(): Promise<WpaStatus> {
     const status = {};
     const res = await this.exec('status');
     const lines = res.split('\n');
     lines.filter(line => line.length > 3).forEach(line => {
       const parts = line.split('=').map(s => s.trim());
-      status[parts[0]] = parts[1];
+      status[parts[0]] = parts[0] === 'id' ? parseInt(parts[1]) : parts[1];
     });
     this.emit('status', status);
-    return status;
+    return <WpaStatus> status;
   }
 
   /**
