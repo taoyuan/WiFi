@@ -13,13 +13,13 @@ export class Wireless extends WPA {
     super(iface);
   }
 
-  async state(): Promise<string> {
+  async connected(): Promise<boolean> {
     const status = await this.status();
     const state = toLower(status.wpa_state);
     if (state === 'connected' || state === 'completed') {
-      return 'connected';
+      return true;
     }
-    return 'disconnected';
+    return false;
   }
 
   /**
