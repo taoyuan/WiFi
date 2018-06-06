@@ -3,4 +3,5 @@
 const {Wireless} = require('..');
 const wireless = new Wireless();
 
-wireless.disconnect();
+(async () => await wireless.disconnect())();
+
