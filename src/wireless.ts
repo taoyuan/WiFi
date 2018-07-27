@@ -60,9 +60,10 @@ export class Wireless extends WPA {
   async addOrUpdateNetwork(ssid: string, password: string, options?) {
     options = options || {};
     const {auth} = options;
-    const data: any = {ssid, psk: password};
+    const data: any = {ssid};
     if (password) {
       data.key_mgmt = 'WPA-PSK';
+      data.psk = password;
     } else {
       data.key_mgmt = 'NONE';
       if (auth === 'WEP' || (password && !auth)) {
@@ -79,6 +80,7 @@ export class Wireless extends WPA {
     const id = network ? network.id : await this.addNetwork();
 
     for (let key of keys) {
+      if (!data[key]) continue;
       if (['ssid', 'psk'].includes(key)) {
         await this.setNetworkSettingString(id, key, data[key]);
       } else {
